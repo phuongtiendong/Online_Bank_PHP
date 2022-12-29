@@ -3,17 +3,12 @@
 </head>
 <link rel="stylesheet" type="text/css" href="css/active_customers.css"/>
 <body>
-
-<?php  
-
+<?php
 	include 'header.php' ;
 	include 'staff_profile_header.php' ;
 	include 'db_connect.php';
-
-
 ?>
 <div class="active_customers_container">
-
 <table border="1px" cellpadding="10">
 			   <th>Sl No.</th>
 			   <th>Username</th>
@@ -29,15 +24,9 @@
 			   <th>Last_Login</th>
 			   <th>LastTransaction</th>
 			   <th>Account_Status</th>
-
-
 <?php
-
-	
-	
 	$sql = "SELECT * from bank_customers";
 	$result = $conn->query($sql);
-	
 	if ($result->num_rows > 0) {	   
 			  $Sl_no = 1; 
     // output data of each row
@@ -61,19 +50,10 @@
 			<td>'.$row['Account_Status'].'</td>
 			</tr>';
 	}
-	
-	
 }
-
 ?>
-
 </table>
 </div>
-
 <?php include 'footer.php'; ?> 
 </body>
 </html>
-
-
-
-

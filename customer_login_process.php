@@ -2,30 +2,17 @@
 <?php
 include 'db_connect.php';
 if(isset($_POST['login-btn'])){
-	
 if(isset($_POST['customer_id'])){
-
-  //with hashing
-// $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
 $password = $_POST['password'];
 $customer_id = $_POST['customer_id'];
 }
-    
 		$sql="SELECT * FROM bank_customers where Customer_ID='$customer_id' and Password='$password' ";
 		$result = $conn->query($sql);
 		$row = $result->fetch_assoc();
 		if($customer_id != $row['Customer_ID'] && $password != $row['Password']){
-			
 		echo '<script>alert("Incorrect Id/Password.")</script>';
-			
-		
 	}
-			
-			
 		else{
-			
-      
 		$_SESSION['customer_login'] = true;
         $_SESSION['Balance'] = $row['Current_Balance'];
 		$_SESSION['Username'] = $row['Username'];
@@ -43,34 +30,7 @@ $customer_id = $_POST['customer_id'];
 		$_SESSION['Cheque'] = $row['Cheque'];
 		date_default_timezone_set('Asia/Kolkata'); 
 		$_SESSION['this_login'] = date("d/m/y h:i:s A");
-
- //SMS Integration to notify customer login----------------------------------
-
-				/*	$mob_no = $row['Mobile_no'];
-					require('textlocal.class.php');
-					$apikey = 'Mzie479SxfY-Z7slYf9AI3zVXCAu0G5skUBQVYOfRU';
-					$textlocal = new Textlocal(false,false,$apikey);
-					$numbers = array($mob_no);
-					$sender = 'TXTLCL';
-					$ipaddress = $_SERVER['REMOTE_ADDR'];
-					$message = 'Hello '.$row['Username'].' you just logged in to your Student Bank of india Internet banking account IP Address : '.$ipaddress.'';
-					
-
-					
-						try {
-							$result = $textlocal->sendSms($numbers, $message, $sender);
-							print_r($result);
-						} catch (Exception $e) {
-							die('Error: ' . $e->getMessage());
-						}  */
-
-	//-------------------------------------------------------------------------
-
 		header('location:customer_profile.php');
 		}
-
 }
-
-
-
 ?>
